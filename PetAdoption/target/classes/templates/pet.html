@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 56px;
+            background-image: url('dog 1.jpeg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .stat-card-total-pets {
+            background-color: #FF69B4;
+            color: white;
+        }
+        .stat-card-adopted-pets {
+            background-color: #8A2BE2;
+            color: white;
+        }
+        .stat-card-available-pets {
+            background-color: #FFD700;
+            color: black;
+        }
+        .card-title, .card-text, h2 {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="stats">
+        <div class="card stat-card text-center stat-card-total-pets">
+            <div class="card-body">
+                <h5 class="card-title">Total Pets</h5>
+                <p class="card-text" id="total-pets">3</p>
+            </div>
+        </div>
+        <div class="card stat-card text-center stat-card-adopted-pets">
+            <div class="card-body">
+                <h5 class="card-title text-center">Adopted Pets</h5>
+                <p class="card-text" id="adopted-pets">0</p>
+            </div>
+        </div>
+        <div class="card stat-card text-center stat-card-available-pets">
+            <div class="card-body">
+                <h5 class="card-title">Available Pets</h5>
+                <p class="card-text" id="available-pets">3</p>
+            </div>
+        </div>
+    </div>
+    <h2 class="my-4">Available Pets</h2>
+    <div class="row" id="pets-container">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="/pet1.jpg" class="card-img-top" alt="Dog 1">
+                <div class="card-body">
+                    <h5 class="card-title">Buddy</h5>
+                    <p class="card-text">Age: 2 years<br>Breed: Labrador Retriever</p>
+                    <button class="btn btn-primary adopt-btn" onclick="toggleAdoptionStatus(this)">Adopt</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="/pet2.jpg" class="card-img-top" alt="Cat 1">
+                <div class="card-body">
+                    <h5 class="card-title">Whiskers</h5>
+                    <p class="card-text">Age: 3 years<br>Breed: Siamese</p>
+                    <button class="btn btn-primary adopt-btn" onclick="toggleAdoptionStatus(this)">Adopt</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="/pet3.jpg" class="card-img-top" alt="Dog 2">
+                <div class="card-body">
+                    <h5 class="card-title">Max</h5>
+                    <p class="card-text">Age: 1 year<br>Breed: Beagle</p>
+                    <button class="btn btn-primary adopt-btn" onclick="toggleAdoptionStatus(this)">Adopt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function toggleAdoptionStatus(button) {
+        const card = button.closest('.card');
+        const cardBody = card.querySelector('.card-body');
+        const petName = cardBody.querySelector('.card-title').innerText;
+        const totalPetsElement = document.getElementById('total-pets');
+        const adoptedPetsElement = document.getElementById('adopted-pets');
+        const availablePetsElement = document.getElementById('available-pets');
+
+        let totalPets = parseInt(totalPetsElement.innerText);
+        let adoptedPets = parseInt(adoptedPetsElement.innerText);
+        let availablePets = parseInt(availablePetsElement.innerText);
+
+        if (button.innerText === 'Adopt') {
+            button.innerText = 'Undo Adoption';
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-danger');
+            adoptedPets++;
+            availablePets--;
+        } else {
+            button.innerText = 'Adopt';
+            button.classList.remove('btn-danger');
+            button.classList.add('btn-primary');
+            adoptedPets--;
+            availablePets++;
+        }
+
+        adoptedPetsElement.innerText = adoptedPets;
+        availablePetsElement.innerText = availablePets;
+    }
+</script>
+</body>
+</html>
